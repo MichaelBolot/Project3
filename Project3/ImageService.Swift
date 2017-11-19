@@ -6,4 +6,32 @@
 //  Copyright © 2017 Michael Bolot. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class imageService{
+    var cache:[URL:UIImage] = [:]
+
+
+    func imageForURL(url: URL?, completion: @escaping (UIImage?) -> ()){
+        guard let url = url else { completion(nil); return}
+        if let image = cache[url]{
+            completion(image)
+            return
+        }
+        let task = URLSession(configuration: .default).dataTask(with: url) { (data,response,error) in
+            ///
+            guard let data = data else{completion(nil); return}
+            print("Data finished")
+            if error != nil{ completion(nil); return}
+            print("Error finished")
+            let image = UIImage(data: data)
+            if let img = image{
+                self.cache[url] = img
+            }
+            
+            completion(image)
+            return
+        }
+        task.resume()
+    }
+}

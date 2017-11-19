@@ -6,4 +6,12 @@
 //  Copyright © 2017 Michael Bolot. All rights reserved.
 //
 
-import Foundation
+import UIKit
+class SelectionCell: UITableViewCell{
+    
+    @IBOutlet weak var userLabel: UILabel!
+    func configure(user: String){
+        self.userLabel.text = user
+    }
+    
+}

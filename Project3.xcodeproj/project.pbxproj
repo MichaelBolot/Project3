@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C1EDD641FBFF290005BEC95 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1EDD631FBFF290005BEC95 /* MessageDetailViewController.swift */; };
+		4C1EDD681FC0E497005BEC95 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1EDD671FC0E497005BEC95 /* ImageService.swift */; };
 		4C3112601FB50819006BC5EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31125F1FB50819006BC5EF /* AppDelegate.swift */; };
 		4C3112621FB50819006BC5EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3112611FB50819006BC5EF /* ViewController.swift */; };
 		4C3112651FB50819006BC5EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3112631FB50819006BC5EF /* Main.storyboard */; };
@@ -14,6 +16,12 @@
 		4C31126A1FB50819006BC5EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3112681FB50819006BC5EF /* LaunchScreen.storyboard */; };
 		4C3112751FB50819006BC5EF /* Project3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3112741FB50819006BC5EF /* Project3Tests.swift */; };
 		4C3112801FB50819006BC5EF /* Project3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31127F1FB50819006BC5EF /* Project3UITests.swift */; };
+		4C31128E1FBBA0FA006BC5EF /* NetworkingServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31128D1FBBA0FA006BC5EF /* NetworkingServices.swift */; };
+		4C3112901FBE3D96006BC5EF /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31128F1FBE3D96006BC5EF /* MessageViewController.swift */; };
+		4C3112941FBE6E8E006BC5EF /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3112931FBE6E8E006BC5EF /* MessageCell.swift */; };
+		4C32E5C21FC1166600C46995 /* MessageSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32E5C11FC1166600C46995 /* MessageSendViewController.swift */; };
+		4C32E5C41FC1273700C46995 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32E5C31FC1273700C46995 /* SelectionViewController.swift */; };
+		4C32E5C61FC1275D00C46995 /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32E5C51FC1275D00C46995 /* SelectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C1EDD631FBFF290005BEC95 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailViewController.swift; sourceTree = "<group>"; };
+		4C1EDD671FC0E497005BEC95 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		4C31125C1FB50819006BC5EF /* Project3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C31125F1FB50819006BC5EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C3112611FB50819006BC5EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +57,12 @@
 		4C31127B1FB50819006BC5EF /* Project3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Project3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C31127F1FB50819006BC5EF /* Project3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project3UITests.swift; sourceTree = "<group>"; };
 		4C3112811FB50819006BC5EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C31128D1FBBA0FA006BC5EF /* NetworkingServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServices.swift; sourceTree = "<group>"; };
+		4C31128F1FBE3D96006BC5EF /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		4C3112931FBE6E8E006BC5EF /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		4C32E5C11FC1166600C46995 /* MessageSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSendViewController.swift; sourceTree = "<group>"; };
+		4C32E5C31FC1273700C46995 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		4C32E5C51FC1275D00C46995 /* SelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +114,15 @@
 			isa = PBXGroup;
 			children = (
 				4C31125F1FB50819006BC5EF /* AppDelegate.swift */,
+				4C3112931FBE6E8E006BC5EF /* MessageCell.swift */,
+				4C32E5C51FC1275D00C46995 /* SelectionCell.swift */,
+				4C32E5C11FC1166600C46995 /* MessageSendViewController.swift */,
+				4C1EDD631FBFF290005BEC95 /* MessageDetailViewController.swift */,
+				4C32E5C31FC1273700C46995 /* SelectionViewController.swift */,
+				4C31128F1FBE3D96006BC5EF /* MessageViewController.swift */,
 				4C3112611FB50819006BC5EF /* ViewController.swift */,
+				4C1EDD671FC0E497005BEC95 /* ImageService.swift */,
+				4C31128D1FBBA0FA006BC5EF /* NetworkingServices.swift */,
 				4C3112631FB50819006BC5EF /* Main.storyboard */,
 				4C3112661FB50819006BC5EF /* Assets.xcassets */,
 				4C3112681FB50819006BC5EF /* LaunchScreen.storyboard */,
@@ -259,8 +283,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C32E5C21FC1166600C46995 /* MessageSendViewController.swift in Sources */,
 				4C3112621FB50819006BC5EF /* ViewController.swift in Sources */,
+				4C32E5C61FC1275D00C46995 /* SelectionCell.swift in Sources */,
+				4C3112941FBE6E8E006BC5EF /* MessageCell.swift in Sources */,
 				4C3112601FB50819006BC5EF /* AppDelegate.swift in Sources */,
+				4C32E5C41FC1273700C46995 /* SelectionViewController.swift in Sources */,
+				4C3112901FBE3D96006BC5EF /* MessageViewController.swift in Sources */,
+				4C31128E1FBBA0FA006BC5EF /* NetworkingServices.swift in Sources */,
+				4C1EDD641FBFF290005BEC95 /* MessageDetailViewController.swift in Sources */,
+				4C1EDD681FC0E497005BEC95 /* ImageService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
