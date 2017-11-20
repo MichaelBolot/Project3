@@ -10,6 +10,7 @@ import UIKit
 class MessageDetailViewController: UIViewController{
     var message: NetworkingServices.Message?
     var uniqueLikers = [String]()
+    var isdmReply = false
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -20,6 +21,7 @@ class MessageDetailViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        likedByLabel.text = "Liked By: "
         configure()
     }
     
@@ -55,7 +57,10 @@ class MessageDetailViewController: UIViewController{
     }
     
     @IBAction func likeButtonTapped(_ sender: Any) {
-        NetworkingServices.shared.postLike(messageID: message!.id){
+        if isdmReply == true{
+            return
+        }
+        NetworkingServices.shared.postLike(messageID: message!.id!){
             DispatchQueue.main.async{
                 self.likesNumLabel.text = String(Int(self.likesNumLabel.text!)! + 1)
                 let currentUser = NetworkingServices.shared.currentUser
@@ -71,6 +76,16 @@ class MessageDetailViewController: UIViewController{
     }
     
     @IBAction func replyButtonTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let sendVC = storyboard.instantiateViewController(withIdentifier: "MessageSendViewController") as! MessageSendViewController
+        sendVC.replyTo = self.message!.id!
+        if isdmReply{
+            sendVC.recipient = message!.user
+        }else{
+            sendVC.recipient = "General"
+        }
+        sendVC.isTemporaryVC = true
+        present(sendVC, animated: true, completion: nil)
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

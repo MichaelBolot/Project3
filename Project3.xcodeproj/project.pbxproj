@@ -22,6 +22,7 @@
 		4C32E5C21FC1166600C46995 /* MessageSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32E5C11FC1166600C46995 /* MessageSendViewController.swift */; };
 		4C32E5C41FC1273700C46995 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32E5C31FC1273700C46995 /* SelectionViewController.swift */; };
 		4C32E5C61FC1275D00C46995 /* SelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32E5C51FC1275D00C46995 /* SelectionCell.swift */; };
+		4C32E5C81FC2362C00C46995 /* PrivateMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C32E5C71FC2362B00C46995 /* PrivateMessageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		4C32E5C11FC1166600C46995 /* MessageSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSendViewController.swift; sourceTree = "<group>"; };
 		4C32E5C31FC1273700C46995 /* SelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
 		4C32E5C51FC1275D00C46995 /* SelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionCell.swift; sourceTree = "<group>"; };
+		4C32E5C71FC2362B00C46995 /* PrivateMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateMessageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,14 +117,15 @@
 			children = (
 				4C31125F1FB50819006BC5EF /* AppDelegate.swift */,
 				4C3112931FBE6E8E006BC5EF /* MessageCell.swift */,
+				4C32E5C71FC2362B00C46995 /* PrivateMessageViewController.swift */,
 				4C32E5C51FC1275D00C46995 /* SelectionCell.swift */,
 				4C32E5C11FC1166600C46995 /* MessageSendViewController.swift */,
+				4C31128D1FBBA0FA006BC5EF /* NetworkingServices.swift */,
 				4C1EDD631FBFF290005BEC95 /* MessageDetailViewController.swift */,
 				4C32E5C31FC1273700C46995 /* SelectionViewController.swift */,
 				4C31128F1FBE3D96006BC5EF /* MessageViewController.swift */,
 				4C3112611FB50819006BC5EF /* ViewController.swift */,
 				4C1EDD671FC0E497005BEC95 /* ImageService.swift */,
-				4C31128D1FBBA0FA006BC5EF /* NetworkingServices.swift */,
 				4C3112631FB50819006BC5EF /* Main.storyboard */,
 				4C3112661FB50819006BC5EF /* Assets.xcassets */,
 				4C3112681FB50819006BC5EF /* LaunchScreen.storyboard */,
@@ -291,6 +294,7 @@
 				4C32E5C41FC1273700C46995 /* SelectionViewController.swift in Sources */,
 				4C3112901FBE3D96006BC5EF /* MessageViewController.swift in Sources */,
 				4C31128E1FBBA0FA006BC5EF /* NetworkingServices.swift in Sources */,
+				4C32E5C81FC2362C00C46995 /* PrivateMessageViewController.swift in Sources */,
 				4C1EDD641FBFF290005BEC95 /* MessageDetailViewController.swift in Sources */,
 				4C1EDD681FC0E497005BEC95 /* ImageService.swift in Sources */,
 			);

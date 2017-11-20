@@ -23,12 +23,18 @@ class NetworkingServices{
         var password: String
     }
     
+    struct PrivateMessage: Codable{
+        var to: String
+        var from: String
+        var message: Message
+    }
+    
     struct Message: Codable{
         var user: String
         var text: String
         var date: Date?
         var imgURL: URL?
-        var id: String
+        var id: String?
         var replyTo: String?
         var likedBy: [String]?
     }
@@ -132,8 +138,19 @@ class NetworkingServices{
         
     }
     
-    func postMessage(message: Message){
-        
+    func postMessage(message: Message, completion:@escaping()->()){
+        let url = URL(string: sourceUrl + "messages")!
+        var request = URLRequest(url: url)
+        request.addValue(self.token.token!, forHTTPHeaderField: "token")
+        request.httpMethod = "Post"
+        request.httpBody = try! JSONEncoder().encode(message)
+        let task = URLSession(configuration: .ephemeral).dataTask(with: request){(data, response, error) in
+            print(response)
+            print(data)
+            print(error)
+            completion()
+        }
+        task.resume()
     }
     
     func postLike(messageID: String, completion:@escaping ()->()){
@@ -150,5 +167,42 @@ class NetworkingServices{
             completion()
         }
         task.resume()
+    }
+    
+    func getPrivateMessages(completion:@escaping ([PrivateMessage])->()){
+        let url = URL(string: sourceUrl + "direct")!
+        var request = URLRequest(url: url)
+        request.addValue(self.token.token!, forHTTPHeaderField: "token")
+        var messages = [PrivateMessage]()
+        request.httpMethod = "GET"
+        
+        let task = URLSession(configuration: .ephemeral).dataTask(with: request) {(data, response, error) in
+            print(response)
+            print(data)
+            print(error)
+            messages = try! JSONDecoder().decode([PrivateMessage].self, from: data!)
+            print(messages)
+            //self.messages = messages
+            completion(messages)
+        }
+        task.resume()
+    }
+    
+    func postPrivateMessage(to: String, message: Message, completion:@escaping ()->()){
+        let url = URL(string: sourceUrl + "direct")!
+        var request = URLRequest(url: url)
+        request.addValue(self.token.token!, forHTTPHeaderField: "token")
+        var message = PrivateMessage(to: to, from: self.currentUser, message: message)
+        request.httpMethod = "POST"
+        request.httpBody = try! JSONEncoder().encode(message)
+        let task = URLSession(configuration: .ephemeral).dataTask(with: request) {(data, response, error) in
+            print(response)
+            print(data)
+            print(error)
+            //self.messages = messages
+            completion()
+        }
+        task.resume()
+        
     }
 }

@@ -32,6 +32,7 @@ extension SelectionViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         previousVC.recipient = userList[indexPath.item]
+        previousVC.configure()
         dismiss(animated: true, completion: nil)
     }
 }
