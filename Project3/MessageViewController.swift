@@ -13,6 +13,7 @@ class MessageViewController: UIViewController{
     var messages = [NetworkingServices.Message]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        //gets the messsages
         NetworkingServices.shared.getMessages(){messages in
             DispatchQueue.main.async{
                 self.messages = messages
@@ -44,6 +45,7 @@ extension MessageViewController: UITableViewDataSource{
 extension MessageViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //brings up MessageDetailViewController so that most details fo the message can be seen
         let messageDetailViewController = storyboard.instantiateViewController(withIdentifier: "MessageDetailViewController") as! MessageDetailViewController
         messageDetailViewController.message = messages[indexPath.item]
         present(messageDetailViewController, animated: true, completion: nil)

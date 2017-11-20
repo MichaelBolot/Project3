@@ -18,10 +18,10 @@ class MessageCell: UITableViewCell{
     
     
     func configure(message: NetworkingServices.Message){
+        //Configures a cell from a message
         self.message = message
         senderLabel.text = message.user
         messageContent.text = message.text
-        print(messageContent.text)
         dateLabel.text = message.date!.description
     }
     

@@ -15,8 +15,10 @@ class SelectionViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //gets users and displays them
         NetworkingServices.shared.getUsers{users in
             DispatchQueue.main.async{
+                //adds "General" so that there is an option for general chat
                 self.userList = ["General"] + users
                 self.tableView.dataSource = self
                 self.tableView.delegate = self

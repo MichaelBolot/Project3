@@ -20,18 +20,21 @@ class MessageDetailViewController: UIViewController{
     @IBOutlet weak var likedByLabel: UILabel!
     
     override func viewDidLoad() {
+        //sets the label default text
         super.viewDidLoad()
         likedByLabel.text = "Liked By: "
         configure()
     }
     
     func configure(){
+        //configures the detail view controller using the message
         nameLabel.text = self.message!.user
         dateLabel.text = self.message!.date?.description
         messageContentLabel.text = self.message!.text
         let numLikes = message!.likedBy?.count ?? 0
         likesNumLabel.text = String(numLikes)
         if(numLikes > 0){
+            //filters out the unique members of the likedBy list to reduce redundancies
             for entry in self.message!.likedBy!{
                 if self.uniqueLikers.contains(entry){
                     continue
@@ -40,6 +43,7 @@ class MessageDetailViewController: UIViewController{
                 }
             }
             var likers = "Liked By: "
+            //Creates a string representation of the unique likers
             for entry in self.uniqueLikers{
                 likers += entry
                 likers += ", "
@@ -47,6 +51,7 @@ class MessageDetailViewController: UIViewController{
             likedByLabel.text = likers
         }
         if message!.imgURL != nil{
+            //if there is an imageurl, get the image and display it
             imageService().imageForURL(url: message!.imgURL){image in
                 DispatchQueue.main.async{
                     self.imageView.image = image
@@ -58,10 +63,12 @@ class MessageDetailViewController: UIViewController{
     
     @IBAction func likeButtonTapped(_ sender: Any) {
         if isdmReply == true{
+            //if this is a dm, prevent the like button from functioning
             return
         }
         NetworkingServices.shared.postLike(messageID: message!.id!){
             DispatchQueue.main.async{
+                //sets up the like, and reflects the changes in the respective labels
                 self.likesNumLabel.text = String(Int(self.likesNumLabel.text!)! + 1)
                 let currentUser = NetworkingServices.shared.currentUser
                 if self.uniqueLikers.contains(currentUser){
@@ -76,6 +83,7 @@ class MessageDetailViewController: UIViewController{
     }
     
     @IBAction func replyButtonTapped(_ sender: Any) {
+        //sets up a message with the proper reply ID and the proper target filled in
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let sendVC = storyboard.instantiateViewController(withIdentifier: "MessageSendViewController") as! MessageSendViewController
         sendVC.replyTo = self.message!.id!
@@ -84,6 +92,7 @@ class MessageDetailViewController: UIViewController{
         }else{
             sendVC.recipient = "General"
         }
+        //set vc as temporary so that it will disappear on completion
         sendVC.isTemporaryVC = true
         present(sendVC, animated: true, completion: nil)
     }

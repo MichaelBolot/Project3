@@ -19,7 +19,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // grabs the username from standards, and if it exists, tries to grab the password
+        //Note: This only works some of the time. Not sure why
         let username = UserDefaults.standard.value(forKey: "username") as? String
         if(username != nil){
             let password = UserDefaults.standard.value(forKey: username!) as? String
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
                     
                 }else{
                     DispatchQueue.main.async{
+                        //if the username/password exists, it logs in for the user and automatically moves to the next vc
                         let username = self.postField.text
                         let password = self.passwordField.text
                         UserDefaults.standard.set(username ?? "", forKey: "username")
@@ -57,11 +59,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func postFieldEnter(_ sender: Any) {
+        //allows one to press enter to move from the first field (user) to the second
         passwordField.becomeFirstResponder()
     }
     
 
     @IBAction func passwordFieldEnter(_ sender: Any) {
+        //attempts to get token as long as some information is present in the fields
         if(postField.text == ""){
             return
         }
@@ -73,11 +77,13 @@ class ViewController: UIViewController {
             if(rtoken == nil){
                 //uses main thread to display error message
                 DispatchQueue.main.async{
+                    //if there is no token an error message shows up
                     self.errorTextView.text = "Invalid Username/Password Combination, retry"
                 }
                 
             }else{
                 DispatchQueue.main.async{
+                    //if there is a valid token, it stores the data and moves on to the next VC
                     let username = self.postField.text
                     let password = self.passwordField.text
                     UserDefaults.standard.set(username ?? "", forKey: "username")

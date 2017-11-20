@@ -21,9 +21,7 @@ class imageService{
         let task = URLSession(configuration: .default).dataTask(with: url) { (data,response,error) in
             ///
             guard let data = data else{completion(nil); return}
-            print("Data finished")
             if error != nil{ completion(nil); return}
-            print("Error finished")
             let image = UIImage(data: data)
             if let img = image{
                 self.cache[url] = img

@@ -23,14 +23,15 @@ class MessageSendViewController: UIViewController{
     }
     
     func configure(){
-        print(recipient)
         recipientLabel.text = recipient
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         if isTemporaryVC{
+            //if the vc is temporary (meaning called by another vc and not the original one in the tab bar), it is dismissed upon cancel
             self.dismiss(animated: true, completion: nil)
         }else{
+            //otherwise, the info is just reset
             self.recipient = "Recipient: "
             self.recipientLabel.text = self.recipient
             self.imageField.text = ""
@@ -40,20 +41,25 @@ class MessageSendViewController: UIViewController{
     }
     
     @IBAction func sendButtonTapped(_ sender: Any) {
+        //after send button is tapped, send the message
         var reply: String?
         var imgInfo: URL?
+        //if the replyTo field hasn't changed, set the reply to nil
+        //otherwise, set the reply to replyTo
         if replyTo == ""{
             reply = nil
         }else{
             reply = replyTo
         }
-        
+        //if imageField hasn't changed, set imgURL (in message) to nil
+        //Otherwise, make the imgURL
         if imageField.text == ""{
             imgInfo = nil
         }else{
             imgInfo = URL(string: imageField.text!)
         }
         
+        //code for if the message is a general message
         if recipientLabel.text == "General"{
             let message = NetworkingServices.Message(user: NetworkingServices.shared.currentUser,
                                              text: messageField.text ?? "",
@@ -74,7 +80,7 @@ class MessageSendViewController: UIViewController{
                 }
             }
         }else{
-            //imgInfo = nil no images in dms
+            //message is a pm, so use that structure instead
             let message = NetworkingServices.Message(user: NetworkingServices.shared.currentUser,
                                                      text: messageField.text ?? "",
                                                      date: Date.init(),
@@ -83,7 +89,7 @@ class MessageSendViewController: UIViewController{
                                                      replyTo: reply,
                                                      likedBy: nil)
             let to = self.recipientLabel.text
-            let from = NetworkingServices.shared.currentUser
+            //checks if a recipient is specified, and if it is, sends the pm
             if to != "Recipient: "{
                 NetworkingServices.shared.postPrivateMessage(to: to!, message: message){
                     DispatchQueue.main.async {
@@ -103,8 +109,10 @@ class MessageSendViewController: UIViewController{
     
     
     @IBAction func selectButtonTapped(_ sender: Any) {
+        //if the select button is tapped, it brings up the view controller with options for pm target
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let selectionVC = storyboard.instantiateViewController(withIdentifier: "SelectionViewController") as! SelectionViewController
+        //passess itself to the "next" vc in order to get the answer back after the selection is made
         selectionVC.previousVC = self
         present(selectionVC, animated: true, completion: nil)
     }

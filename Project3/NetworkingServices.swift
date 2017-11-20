@@ -12,9 +12,9 @@ class NetworkingServices{
     
     static var shared = NetworkingServices()
     
-    var users = ["Template"]
+    var users = ["Template"] //userlist to be stored in the class
     var messages = [Message]()
-    var currentUser = ""
+    var currentUser = ""  //currentUser so that messages can have an accurate source
     
     var sourceUrl = "https://obscure-crag-65480.herokuapp.com/"
 
@@ -50,6 +50,7 @@ class NetworkingServices{
     var token = Token(token: "testThings")
 
     func testLogin(){
+        //function to test login, has my info hardcoded onto it
         let user = User(name: "michael.bolot", password: "kgcegk7r")
         let url = URL(string: sourceUrl + "login")!
         var request = URLRequest(url: url)
@@ -57,16 +58,13 @@ class NetworkingServices{
         request.httpMethod = "POST"
         
         let task = URLSession(configuration: .ephemeral).dataTask(with: request) {(data, response, error) in
-            print(response)
-            print(data)
-            print(error)
         }
         task.resume()
         
     }
 
     func getToken(user: User, completion:@escaping (String?)->()){
-        //let user = User(name: "michael.bolot", password: "kgcegk7r")
+        //gets the token for the user
         let url = URL(string: sourceUrl + "login")!
         var request = URLRequest(url: url)
         
@@ -78,16 +76,16 @@ class NetworkingServices{
             if let hr = response as? HTTPURLResponse {
                 if hr.statusCode != 200 {
                     completion(nil)
-                    print("LOGIN STATUS \(hr.statusCode)")
+                    //login has failed, so complete with nil
                 }
             }
             if(data == nil){
+                //return/complete if no data
                 completion(nil)
                 return
             }
+            //decode token
             tkInter = try? JSONDecoder().decode(Token.self, from: data!)
-            print("TOKEN IS")
-            print(tkInter?.token)
             if(tkInter != nil){
                 self.token = tkInter!
                 self.currentUser = user.name
@@ -95,22 +93,17 @@ class NetworkingServices{
             completion(tkInter?.token)
         }
         postTask.resume()
-        //        return tkInter.token
     }
 
     func getUsers(completion:@escaping ([String])->()){
-        print("THE TOKEN NOW IS")
-        print(self.token.token)
+        //gets the users for use in the selectionViewController
         let url = URL(string: sourceUrl + "users")!
         var request = URLRequest(url: url)
         request.addValue(self.token.token!, forHTTPHeaderField: "token")
         request.httpMethod = "GET"
         
-        var userList = ["Bull", "garbage", "trash"]
+        var userList = ["Bull", "garbage", "trash"] //default string array, almost immediately filled with real values
         let task = URLSession(configuration: .ephemeral).dataTask(with: request) {(data, response, error) in
-            print(response)
-            print(data)
-            print(error)
             userList = try! JSONDecoder().decode([String].self, from: data!)
             self.users = userList
             completion(self.users)
@@ -119,7 +112,7 @@ class NetworkingServices{
     }
     
     func getMessages(completion:@escaping ([Message])->()){
-        print(self.token.token)
+        //function to get General messages
         let url = URL(string: sourceUrl + "messages")!
         var request = URLRequest(url: url)
         request.addValue(self.token.token!, forHTTPHeaderField: "token")
@@ -127,9 +120,6 @@ class NetworkingServices{
         
         var messages = [Message]()
         let task = URLSession(configuration: .ephemeral).dataTask(with: request) {(data, response, error) in
-            print(response)
-            print(data)
-            print(error)
             messages = try! JSONDecoder().decode([Message].self, from: data!)
             self.messages = messages
             completion(messages)
@@ -139,21 +129,20 @@ class NetworkingServices{
     }
     
     func postMessage(message: Message, completion:@escaping()->()){
+        //function to post general messages
         let url = URL(string: sourceUrl + "messages")!
         var request = URLRequest(url: url)
         request.addValue(self.token.token!, forHTTPHeaderField: "token")
         request.httpMethod = "Post"
         request.httpBody = try! JSONEncoder().encode(message)
         let task = URLSession(configuration: .ephemeral).dataTask(with: request){(data, response, error) in
-            print(response)
-            print(data)
-            print(error)
             completion()
         }
         task.resume()
     }
     
     func postLike(messageID: String, completion:@escaping ()->()){
+        //function to post like, not used for dms
         let url = URL(string: sourceUrl + "like")!
         var request = URLRequest(url: url)
         request.addValue(self.token.token!, forHTTPHeaderField: "token")
@@ -161,15 +150,13 @@ class NetworkingServices{
         request.httpMethod = "POST"
         request.httpBody = try! JSONEncoder().encode(like)
         let task = URLSession(configuration: .ephemeral).dataTask(with: request){(data, response, error) in
-            print(response)
-            print(data)
-            print(error)
             completion()
         }
         task.resume()
     }
     
     func getPrivateMessages(completion:@escaping ([PrivateMessage])->()){
+        //gets privateMessages for the user
         let url = URL(string: sourceUrl + "direct")!
         var request = URLRequest(url: url)
         request.addValue(self.token.token!, forHTTPHeaderField: "token")
@@ -177,29 +164,21 @@ class NetworkingServices{
         request.httpMethod = "GET"
         
         let task = URLSession(configuration: .ephemeral).dataTask(with: request) {(data, response, error) in
-            print(response)
-            print(data)
-            print(error)
             messages = try! JSONDecoder().decode([PrivateMessage].self, from: data!)
-            print(messages)
-            //self.messages = messages
             completion(messages)
         }
         task.resume()
     }
     
     func postPrivateMessage(to: String, message: Message, completion:@escaping ()->()){
+        //posts the private messages
         let url = URL(string: sourceUrl + "direct")!
         var request = URLRequest(url: url)
         request.addValue(self.token.token!, forHTTPHeaderField: "token")
-        var message = PrivateMessage(to: to, from: self.currentUser, message: message)
+        var privateMessage = PrivateMessage(to: to, from: self.currentUser, message: message)
         request.httpMethod = "POST"
-        request.httpBody = try! JSONEncoder().encode(message)
+        request.httpBody = try! JSONEncoder().encode(privateMessage)
         let task = URLSession(configuration: .ephemeral).dataTask(with: request) {(data, response, error) in
-            print(response)
-            print(data)
-            print(error)
-            //self.messages = messages
             completion()
         }
         task.resume()

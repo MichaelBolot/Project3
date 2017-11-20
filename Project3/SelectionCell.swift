@@ -8,7 +8,7 @@
 
 import UIKit
 class SelectionCell: UITableViewCell{
-    
+    //simple selection cell for seleting a user to send messages to
     @IBOutlet weak var userLabel: UILabel!
     func configure(user: String){
         self.userLabel.text = user
